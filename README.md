@@ -38,7 +38,9 @@
   - 어플리케이션 빌드
 
     ```
-    mvn clean package 
+    mvn clean package
+    //테스트 제외 빌드
+    mvn clean package  -DskipTests   
     ```
 - 실행
     ```

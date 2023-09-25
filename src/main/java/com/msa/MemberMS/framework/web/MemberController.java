@@ -3,7 +3,6 @@ package com.msa.MemberMS.framework.web;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.msa.MemberMS.application.usecase.AddMemberUsecase;
 import com.msa.MemberMS.application.usecase.InquiryMemberUsecase;
-import com.msa.MemberMS.framework.kafkaAdapter.MemberProducer;
 import com.msa.MemberMS.framework.web.dto.MemberInfoDTO;
 import com.msa.MemberMS.framework.web.dto.MemberOutPutDTO;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +20,11 @@ import java.util.concurrent.ExecutionException;
 public class MemberController {
 
 
-    private final MemberProducer memberProducer;
 
     private static Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     private final AddMemberUsecase addMemberUsecase;
     private final InquiryMemberUsecase inquiryMemberUsecase;
-
-    @PostMapping("/msg")
-    public void sendMessage(@RequestBody String message) throws ExecutionException, InterruptedException, JsonProcessingException {
-
-        //memberProducer.sendTest(message);
-        memberProducer.sendMessage(message);
-        logger.info("ItemRented 이벤트 발신 : {}", message);
-    }
 
     @PostMapping("/Member/")
     public ResponseEntity<MemberOutPutDTO> addMember(@RequestBody MemberInfoDTO memberInfoDTO)
